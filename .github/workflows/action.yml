@@ -1,9 +1,6 @@
 name: Test Action
 
 on:
-  schedule:
-    - cron:  '*/5 * * * *'
-
   push:
     branches:
       - master
@@ -32,3 +29,5 @@ jobs:
           NODE_DEBUG: gh-pages
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          GIT_CONFIG_NAME:  ${{ github.actor }}
+          GIT_CONFIG_EMAIL: '${{ github.actor }}@users.noreply.github.com'
