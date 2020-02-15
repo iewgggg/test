@@ -1,0 +1,32 @@
+name: Test Action
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [10.x]
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: build
+        run: |
+          npm install
+          npm run build
+        env:
+          ENV_USER: ${{ secrets.ENV_USER }}
+      - name: site
+        run: npm run gh-pages
+        env:
+          NODE_DEBUG: gh-pages
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
