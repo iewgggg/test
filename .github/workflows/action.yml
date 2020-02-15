@@ -21,17 +21,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-      - name: build
-        run: |
-          npm install
-          npm run build
+      - run: npm install
+      - run: npm run build
         env:
           ENV_USER: ${{ secrets.ENV_USER }}
       - name: site
         run: npm run gh-pages
+        continue-on-error: true
         env:
           NODE_DEBUG: gh-pages
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          GIT_CONFIG_NAME:  ${{ github.actor }}
-          GIT_CONFIG_EMAIL: '${{ github.actor }}@users.noreply.github.com'
