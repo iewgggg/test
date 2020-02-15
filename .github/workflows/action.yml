@@ -14,8 +14,7 @@ jobs:
       - name: test repository_dispatch
         if: github.event_name == 'repository_dispatch'
         run: |
-          echo ${{ github.event_type }}
-          echo '${{ toJSON(github.event.client_payload) }}'
+          echo '${{ toJSON(github.event) }}'
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
