@@ -14,6 +14,11 @@ jobs:
         node_version: [10.x]
         os: [ubuntu-latest]
     steps:
+      - name: test repository_dispatch
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          echo ${{ github.event_type }}
+          echo ${{ toJSON(github.event.client_payload) }}
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
