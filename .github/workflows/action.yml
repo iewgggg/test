@@ -35,6 +35,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+        env:
+          GITHUB_EVENT_NAME: push
 
       - run: npm install
 
