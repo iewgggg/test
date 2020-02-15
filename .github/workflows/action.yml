@@ -29,6 +29,7 @@ jobs:
           echo "::set-output name=dir::$(npm config get cache)"
 
       - uses: actions/cache@v1
+        continue-on-error: true
         with:
           path: ${{ steps.npm-cache.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -43,7 +44,6 @@ jobs:
 
       - name: site
         run: npm run gh-pages
-        continue-on-error: true
         env:
           NODE_DEBUG: gh-pages
           GITHUB_TOKEN: ${{ github.token }}
