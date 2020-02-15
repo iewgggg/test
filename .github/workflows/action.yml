@@ -15,15 +15,32 @@ jobs:
         if: github.event_name == 'repository_dispatch'
         run: |
           echo '${{ toJSON(github.event) }}'
+
       - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - run: npm install
+
       - run: npm run build
         env:
           ENV_USER: ${{ secrets.ENV_USER }}
+
       - name: site
         run: npm run gh-pages
         continue-on-error: true
