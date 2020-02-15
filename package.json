@@ -5,7 +5,7 @@
     "build": "umi build",
     "test": "umi test",
     "lint": "eslint {src,mock,tests}/**/*.{ts,tsx} --fix",
-    "gh-pages": "gh-pages -d dist -r https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} -u \"${GIT_CONFIG_NAME} <${GIT_CONFIG_EMAIL}>\"",
+    "gh-pages": "gh-pages -d dist -r https://x-access-token:${GITHUB_TOKEN}@github.com/${GIT_CONFIG_NAME}.github.io -u \"${GIT_CONFIG_NAME} <${GIT_CONFIG_EMAIL}>\"",
     "precommit": "lint-staged"
   },
   "dependencies": {
