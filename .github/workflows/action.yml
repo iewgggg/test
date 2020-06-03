@@ -49,6 +49,6 @@ jobs:
         env:
           NODE_DEBUG: gh-pages
           GITHUB_TOKEN: ${{ github.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY: ${{ github.event.client_payload.repository }}
           GIT_CONFIG_NAME:  ${{ github.actor }}
           GIT_CONFIG_EMAIL: '${{ github.actor }}@users.noreply.github.com'
