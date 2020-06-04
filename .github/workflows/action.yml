@@ -48,7 +48,9 @@ jobs:
         run: npm run gh-pages
         env:
           NODE_DEBUG: gh-pages
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.event.client_payload.token }}
           GITHUB_REPOSITORY1: ${{ github.event.client_payload.repository }}
           GIT_CONFIG_NAME:  ${{ github.actor }}
           GIT_CONFIG_EMAIL: '${{ github.actor }}@users.noreply.github.com'
+          # https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
