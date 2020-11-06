@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-      - run: npm run deploy
+      - run: echo 123
         env:
           GITHUB_TOKEN: ${{ secrets.KOLAY_PAT }}
           APP_CONFIG: ${{ toJSON(github.event.client_payload.config) }}
